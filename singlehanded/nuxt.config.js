@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "SingleHanded.Tech",
+    title: "SingleHandedTyping",
     htmlAttrs: {
       lang: "en",
     },
