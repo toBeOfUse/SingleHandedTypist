@@ -1,0 +1,94 @@
+<!-- NOTE: this is a mess bc it's a quick prototype -->
+
+<!DOCTYPE html>
+<html style="margin: 0; padding: 0; background-color: #d5d5d5">
+  <head>
+    <meta charset="utf-8" />
+    <title>One-Handed Word Processor</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Crimson Pro", serif;
+      }
+      div#editor.ql-container {
+        font-size: 16px;
+      }
+      .ql-toolbar.ql-snow {
+        border: none;
+        border-bottom: 1px solid #aaa;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      margin: 12px auto;
+      border-radius: 4px;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      width: 100vw;
+      max-width: 1200px;
+      height: calc(100vh - 24px);
+      box-sizing: border-box;
+      background-color: white;
+    "
+  >
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 8px;
+        width: 45%;
+      "
+    >
+      <div id="text-content">
+        <h1 style="margin-top: 4px">One-Handed Word Processor</h1>
+        <p>This word processor works with one hand.</p>
+        <p>Blah blah blah blah blah</p>
+      </div>
+      <div>Some kind of graphic</div>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 8px;
+        width: 55%;
+      "
+    >
+      <div
+        id="editor-container"
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: stretch;
+          height: 100%;
+          border-radius: 4px;
+          overflow: hidden;
+          border: 2px solid #aaa;
+        "
+      >
+        <div id="editor" style="height: 100%; border: none">
+          <p>Hello World!</p>
+          <p>Some initial <strong>bold</strong> text</p>
+          <p><br /></p>
+        </div>
+      </div>
+
+      <img src="keyboard.svg" style="width: 100%; height: auto" />
+    </div>
+    <script>
+      const quill = new Quill("#editor", { theme: "snow" });
+    </script>
+  </body>
+</html>
