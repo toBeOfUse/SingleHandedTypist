@@ -2,20 +2,50 @@
 import Keyboard from "./Keyboard.vue";
 import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const side = ref<"left" | "right">("right");
+const secondariesActive = ref(false);
+const pressedKeys = ref<string[]>([]);
+const layoutContainer = ref<HTMLDivElement | null>(null);
+onMounted(() => {
+  if (layoutContainer.value) {
+    layoutContainer.value?.addEventListener("keydown", (event) => {
+      if (event.key === " ") {
+        secondariesActive.value = true;
+      } else {
+        const key = event.key.toUpperCase();
+        pressedKeys.value.push(key);
+      }
+    });
+    layoutContainer.value?.addEventListener("keyup", (event) => {
+      if (event.key === " ") {
+        secondariesActive.value = false;
+      } else {
+        const key = event.key.toUpperCase();
+        pressedKeys.value = pressedKeys.value.filter((k) => k !== key);
+      }
+    });
+  } else {
+    throw new Error("layout container not mounted");
+  }
+});
+const editorContent = ref("<p>hello!</p>");
 </script>
 
 <template>
-  <div id="layout">
+  <div id="layout" ref="layoutContainer">
     <div id="main-row" :style="{ flexDirection: side === 'left' ? 'row' : 'row-reverse' }">
       <div id="info-column">
         <h1>One-Handed Word Processor</h1>
-        <Keyboard :side="side" />
+        <Keyboard
+          :side="side"
+          :secondaries-active="secondariesActive"
+          :pressed-keys="pressedKeys"
+        />
       </div>
       <div id="editor-column">
-        <QuillEditor theme="snow" />
+        <QuillEditor theme="snow" v-bind:content="editorContent" content-type="html" />
       </div>
     </div>
     <button
@@ -70,7 +100,7 @@ button {
   height: 100%;
   width: 100%;
   display: flex;
-  gap: 16px;
+  gap: 24px;
 }
 
 #info-column {

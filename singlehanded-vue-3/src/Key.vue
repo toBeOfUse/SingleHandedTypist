@@ -6,15 +6,17 @@
       border-radius: 4px;
       border: 1px solid black;
       position: relative;
+      transition: transform 20ms linear;
     "
+    :style="{ transform: isPressed ? 'translate(-3px, 2px)' : 'translate(0px, 0px)' }"
   >
     <span
-      style="position: absolute; left: 18%; top: 10%"
+      style="position: absolute; left: 13%; top: 9%"
       :style="{ opacity: secondariesActive ? 0.5 : 1 }"
       >{{ primaryLetter }}</span
     >
     <span
-      style="position: absolute; right: 18%; bottom: 10%"
+      style="position: absolute; right: 13%; bottom: 9%"
       :style="{ opacity: secondariesActive ? 1 : 0.5 }"
       >{{ secondaryLetter }}</span
     >
