@@ -4,18 +4,22 @@ import { QuillEditor } from "@vueup/vue-quill";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import { onMounted, ref } from "vue";
 
-const side = ref<"left" | "right">("right");
+const side = ref<"left" | "right">("left");
 const secondariesActive = ref(false);
 const pressedKeys = ref<string[]>([]);
 const layoutContainer = ref<HTMLDivElement | null>(null);
 onMounted(() => {
   if (layoutContainer.value) {
     layoutContainer.value?.addEventListener("keydown", (event) => {
+      console.log(event);
       if (event.key === " ") {
         secondariesActive.value = true;
       } else {
         const key = event.key.toUpperCase();
         pressedKeys.value.push(key);
+      }
+      if (secondariesActive.value) {
+        event.preventDefault();
       }
     });
     layoutContainer.value?.addEventListener("keyup", (event) => {

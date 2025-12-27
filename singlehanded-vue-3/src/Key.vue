@@ -2,13 +2,16 @@
   <div
     style="
       height: 36px;
-      width: 36px;
       border-radius: 4px;
       border: 1px solid black;
       position: relative;
       transition: transform 20ms linear;
     "
-    :style="{ transform: isPressed ? 'translate(-3px, 2px)' : 'translate(0px, 0px)' }"
+    :style="{
+      width: `${36 * (widthRatio ?? 1)}px`,
+      transform: isPressed ? 'translateY(2px)' : 'translate(0px)',
+      boxShadow: `-3px ${isPressed ? '1px' : '3px'} 0 ${shadowColor}`,
+    }"
   >
     <span
       style="position: absolute; left: 13%; top: 9%"
@@ -29,6 +32,8 @@ defineProps<{
   secondaryLetter: string;
   isPressed: boolean;
   secondariesActive: boolean;
+  shadowColor: string;
+  widthRatio?: number;
 }>();
 </script>
 
